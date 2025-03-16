@@ -1,0 +1,93 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Malak documentation",
+  "colors": {
+    "primary": "#0a3171",
+    "light": "#1150db",
+    "dark": "#0a3171"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Developing",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Open Source Contributions",
+            "pages": [
+              "features/updates",
+              "features/images",
+              "features/settings",
+              "features/navigation",
+              "features/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Self hosting",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "self-hosting/introduction",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Open Source Contributions",
+            "pages": [
+              "features/updates",
+              "features/images",
+              "features/settings",
+              "features/navigation",
+              "features/reusable-snippets"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Discord",
+          "href": "https://discord.gg/SprGqDFnDz",
+          "icon": "discord"
+        },
+        {
+          "anchor": "Github",
+          "href": "https://github.com/ayinke-llc/malak",
+          "icon": "github"
+        }
+      ]
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@ayinke.ventures"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.malak.vc"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/malakvc",
+      "github": "https://github.com/ayinke-llc/malak"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+---
+title: Backend configurations
+description: Find out every available configuration for the backend
+icon: "gear"
+---
+
+There are two ways to configure Malak:
+
+- Configuration file. We use `.yml`
+- Env values. The prefix starts with `MALAK_`
+
+As an example, take this config file:
+
+```yml
+auth:
+  google:
+    client_id: "CLIENT_ID"
+    client_secret: "CLIENT_SECRET"
+    redirect_uri: "http://localhost:3000"
+
+  jwt:
+    key: JWT_KEY
+```
+
+To use env values to configure this, you need this:
+
+```txt
+MALAK_AUTH_GOOGLE_CLIENT_ID=
+MALAK_AUTH_GOOGLE_CLIENT_SECRET=
+MALAK_AUTH_GOOGLE_REDIRECT_URI=
+
+MALAK_AUTH_JWT_KEY=
+```
+
+Essentially every level in the yaml should just be replaced by `_` in the env settings.

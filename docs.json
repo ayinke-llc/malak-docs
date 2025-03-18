@@ -16,18 +16,15 @@
             "group": "Get Started",
             "pages": [
               "introduction",
-              "quickstart",
-              "development"
+              "development",
+              "backend-configuration"
             ]
           },
           {
             "group": "Open Source Contributions",
             "pages": [
-              "features/updates",
-              "features/images",
-              "features/settings",
-              "features/navigation",
-              "features/reusable-snippets"
+              "pr",
+              "styling"
             ]
           }
         ]
@@ -39,7 +36,6 @@
             "group": "Get Started",
             "pages": [
               "self-hosting/introduction",
-              "quickstart",
               "development"
             ]
           },

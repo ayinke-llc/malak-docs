@@ -1,108 +1,139 @@
 ---
-title: "Development"
-description: "Preview changes locally to update your docs"
+title: "Local Development"
+description: "Building and working with Malak Locally"
+icon: code
 ---
 
-<Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before
-  proceeding.
-</Info>
+Malak runs with very minimal hardware requirements by itself. While it
 
-Follow these steps to install and run Mintlify on your operating system:
+<Warning>
+  Malak has been tested and developed extensively on macOS but there are
+  extremely high chances it works and compiles correcly on windows. Let us know
+  if it does :)
+</Warning>
 
-**Step 1**: Install Mintlify:
+<Tip>For production, we strongly recommend Linux</Tip>
 
-<CodeGroup>
+To run Malak, you need to install a few things. Go, Node.js, bun, Git. We will not go through the installation
+of these as you can find them on their relative websites.
 
-```bash npm
-npm i -g mintlify
-```
+## Development Setup
 
-```bash yarn
-yarn global add mintlify
-```
-
-</CodeGroup>
-
-**Step 2**: Navigate to the docs directory (where the `mint.json` file is located) and execute the following command:
+**Step 1**: Clone the Malak Repo
 
 ```bash
-mintlify dev
+  git clone git@github.com:ayinke-llc/malak.git
+
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+### Backend
 
-### Custom Ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. To run Mintlify on port 3333, for instance, use this command:
+Navigate to the newly created `malak` directory
 
 ```bash
-mintlify dev --port 3333
+docker compose up
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+This installs the dependencies you need: Postgresql, Redis, Minio, Grafana and Mailhog for local email testing
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
+#### Configuration
+
+At the very minimum, you need to create a `config.yml` containing the following:
+
+```yaml
+auth:
+  google:
+    client_id: "CLIENT_ID"
+    client_secret: "CLIENT_SECRET"
+    redirect_uri: "http://localhost:3000"
+    is_enabled: true
+
+  jwt:
+    key: JWT_KEY
+
+billing:
+  is_enabled: true
+  default_plan_reference: prod_Qmjfkf
+  stripe:
+    api_key: sk_test_51P
+    webhook_secret: whsec_XCt
+
+http:
+  swagger:
+    port: 9999
+    ui_enabled: true
+
+uploader:
+  s3:
+    access_key: BhK
+    access_secret: dzE
+    region: lagos-1
+    endpoint: http://localhost:9000
+    use_tls: false
+
+email:
+  provider: smtp
+  sender: email@updates.domain
+  sender_name: Malak
+  smtp:
+    host: localhost
+    password: random
+    username: random
+    use_tls: false
+    port: 9125
+
+secrets:
+  provider: aes_gcm
+  aes:
+    key: ujffjkfk
 ```
 
-## Mintlify Versions
+> You can find all [possible configuration values here](/backend-configuration)
+
+#### Running binary
 
 Please note that each CLI release is associated with a specific version of Mintlify. If your local website doesn't align with the production version, please update the CLI:
 
 <CodeGroup>
 
-```bash npm
-npm i -g mintlify@latest
+```bash make
+  make run
 ```
 
-```bash yarn
-yarn global upgrade mintlify
+```bash command_line
+  go run cmd/*.go
 ```
 
 </CodeGroup>
 
-## Validating Links
-
-The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
+#### Migrations
 
 ```bash
-mintlify broken-links
+make migrate
 ```
 
-## Deployment
+### Frontend
 
-<Tip>
-  Unlimited editors available under the [Pro Plan](https://mintlify.com/pricing)
-  and above.
-</Tip>
+#### Install dependencies
 
-If the deployment is successful, you should see the following:
+```bash
+  cd web/ui
+```
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: "0.5rem" }} />
-</Frame>
+```bash
+  bun i
+```
 
-## Code Formatting
+#### Add configuration
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall mintlify: `npm install -g mintlify`
-
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the \~/.mintlify folder. Afterwards, run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/mintlify?activeTab=versions)
+```txt
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+# NEXT_PUBLIC_MALAK_POSTHOG_KEY=
+# NEXT_PUBLIC_MALAK_POSTHOG_HOST=https://us.i.posthog.com
+# NEXT_PUBLIC_MALAK_ENABLE_POSTHOG=false
+# NEXT_PUBLIC_SENTRY_DSN=https://xxxx.ingest.us.sentry.io/45
+NEXT_PUBLIC_DECKS_DOMAIN=https://deck.malak.vc
+NEXT_PUBLIC_SUPPORT_EMAIL=support@ayinke.ventures
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:5300/v1
+```

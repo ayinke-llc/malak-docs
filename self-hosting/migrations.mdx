@@ -1,0 +1,18 @@
+---
+title: Database migrations
+icon: "database"
+---
+
+We use database migrations in order to handle changes to the
+database schema in a secure and stable way. This is also useful when adding new features amongst others.
+
+## Run migration
+
+Before updating the version of Malak you have, please always run the migration command to make sure
+new database schemas are applied to support either features or bugfixes accompanied with the new Malak release.
+
+```bash
+malak migrate
+```
+
+This can be automated as part of your release/upgrade processes.

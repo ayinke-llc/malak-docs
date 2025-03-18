@@ -1,0 +1,47 @@
+---
+title: Upgrading
+icon: "sparkles"
+---
+
+<Warning>
+  Please remember to always [run and apply database
+  migrations](/self-hosting/migrations) before upgrading
+</Warning>
+
+We publish new releases in two major ways:
+
+- Docker images
+- Binaries
+
+## Docker
+
+Our images are hosted on [Github Packages](https://github.com/ayinke-llc/malak/pkgs/container/malak).
+And the url is `ghcr.io/ayinke-llc/malak`. We usually publish releases in the following format: `0.1.2`. As an example,
+if you wanted the `0.7.5` release, you need to do the following:
+
+```sh
+docker pull ghcr.io/ayinke-llc/malak:0.7.5
+```
+
+### Other versions
+
+If you wanted to live on the edge a little bit or needed a new feature which has not landed into a
+release. Or you just want us to dogfood Malak in production, we publish new images on every commit.
+
+So you can just take the commit hash ( first 8 characters ) and append
+instead of the version tag e.g
+
+```sh
+docker pull ghcr.io/ayinke-llc/malak:17cdd5ed
+```
+
+## Binary
+
+We publish new releases [on Github](https://github.com/ayinke-llc/malak/releases). You will
+find compiled binaries for Linux , macOS (`arm` and `x86`). And also Windows.
+
+> There are no nightly releases for binaries unlike for the docker images. We only build and publish them when we tag or cut a new release
+
+## Build yourself
+
+You can build the project yourself by just cloning the project and running `go build -o malak cmd/*.go`

@@ -1,0 +1,34 @@
+---
+title: Cron jobs
+icon: "repeat"
+---
+
+## Sending investors updates
+
+We only schedule updates when you send in the dashboard. We do not send immediately.
+Instead we rely on a background job to actually process the updates and send them to
+the recipients.
+
+```sh
+malak cron updates
+```
+
+<Tip>
+  Ideally you want to configure this to run once a day. Or even once a month.
+  Depending on how much updates you are sending. You can even run this every 30
+  minutes
+</Tip>
+
+## Aggregating Deck viewing analytics
+
+We collect reasonable data when a deck is shared and viewed. But to process them and make them
+human readable ( more like dashbaord readable ), we have to aggregate and process them.
+
+```sh
+malak cron deck-analytics
+```
+
+<Tip>
+  Run this depending on how much delay is fine for the deck data analytics to
+  show up in the dashboard. 30 minutes? once a day? 10 times a day?
+</Tip>

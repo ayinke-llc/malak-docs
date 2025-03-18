@@ -35,18 +35,19 @@
           {
             "group": "Get Started",
             "pages": [
-              "self-hosting/introduction",
-              "development"
+              "self-hosting/migrations",
+              "self-hosting/upgrading",
+              "self-hosting/integrations",
+              "self-hosting/cron",
+              "self-hosting/license"
             ]
           },
           {
-            "group": "Open Source Contributions",
+            "group": "One click deployments",
             "pages": [
-              "features/updates",
-              "features/images",
-              "features/settings",
-              "features/navigation",
-              "features/reusable-snippets"
+              "deployments/vercel",
+              "deployments/render",
+              "deployments/railway"
             ]
           }
         ]

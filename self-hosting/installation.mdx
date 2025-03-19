@@ -1,0 +1,94 @@
+---
+title: "Installation"
+description: "Installing and running in production"
+icon: code
+---
+
+Malak runs with very minimal hardware requirements by itself, you really need
+as little as 1GB ram amongst others.
+
+<Tip>
+  For production, we strongly recommend Linux but it should work across Windows
+  and macOS too
+</Tip>
+
+## Backend
+
+At the very minimum, this needs to be in your `.env` or use your `.yml` but if using `.env`,
+it should look like below:
+
+```txt
+MALAK_AUTH_GOOGLE_CLIENT_ID=
+MALAK_AUTH_GOOGLE_CLIENT_SECRET=
+MALAK_AUTH_GOOGLE_REDIRECT_URI=https://app.malak.vc
+MALAK_AUTH_GOOGLE_IS_ENABLED=true
+
+MALAK_AUTH_JWT_KEY=a907e75f8091
+
+MALAK_BILLING_IS_ENABLED=true
+MALAK_BILLING_DEFAULT_PLAN_REFERENCE=prod_Qm
+MALAK_BILLING_STRIPE_API_KEY=sk_live_51PvJQ
+MALAK_BILLING_STRIPE_WEBHOOK_SECRET=whsec_04
+
+MALAK_HTTP_SWAGGER_UI_ENABLED=false
+MALAK_HTTP_PORT=5400
+
+MALAK_LOGGING_MODE=prod
+
+MALAK_UPLOADER_S3_ACCESS_KEY=78264ae70f26d7
+MALAK_UPLOADER_S3_ACCESS_SECRET=5bc45d2
+MALAK_UPLOADER_S3_REGION=auto
+MALAK_UPLOADER_S3_ENDPOINT=https://6d3.cloudflarestorage.com
+MALAK_UPLOADER_S3_USE_TLS=true
+
+MALAK_EMAIL_PROVIDER=resend
+MALAK_EMAIL_RESEND_API_KEY=re_c
+
+MALAK_SECRETS_PROVIDER=aes_gcm
+MALAK_SECRETS_AES_KEY=V90duVSe
+```
+
+<Tip>
+  There are way more options but [you can find other
+  options](/backend-configuration){" "}
+</Tip>
+
+### Running
+
+Prerequisites:
+
+- [Run cron jobs](/self-hosting/cron)
+- [Run database migrations](/self-hosting/migrations)
+
+#### VPS, bare metal
+
+To run the actual server, you need the following command:
+
+```sh
+malak http
+```
+
+##### Systemd service
+
+You can use this sample Systemd configuration to run the service.
+
+```txt
+[Unit]
+Description=Malak Backend API
+
+[Service]
+ExecStart=malak http
+User=root
+Group=root
+UMask=007
+EnvironmentFile=/etc/path/.env
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Docker
+
+```sh
+docker run ghcr.io/ayinke-llc/malak:0.7.5
+```

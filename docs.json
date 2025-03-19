@@ -35,6 +35,7 @@
           {
             "group": "Get Started",
             "pages": [
+              "self-hosting/installation",
               "self-hosting/migrations",
               "self-hosting/upgrading",
               "self-hosting/integrations",

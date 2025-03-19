@@ -27,10 +27,8 @@ MALAK_AUTH_GOOGLE_IS_ENABLED=true
 
 MALAK_AUTH_JWT_KEY=a907e75f8091
 
-MALAK_BILLING_IS_ENABLED=true
+## new acccounts are assigned this plan
 MALAK_BILLING_DEFAULT_PLAN_REFERENCE=prod_Qm
-MALAK_BILLING_STRIPE_API_KEY=sk_live_51PvJQ
-MALAK_BILLING_STRIPE_WEBHOOK_SECRET=whsec_04
 
 MALAK_HTTP_SWAGGER_UI_ENABLED=false
 MALAK_HTTP_PORT=5400
@@ -62,11 +60,8 @@ auth:
     key: JWT_KEY
 
 billing:
-  is_enabled: true
+  ## new accounts assigned this plan
   default_plan_reference: prod_Qmjfkf
-  stripe:
-    api_key: sk_test_51P
-    webhook_secret: whsec_XCt
 
 http:
   swagger:
@@ -112,7 +107,7 @@ Prerequisites:
 - [Run cron jobs](/self-hosting/cron)
 - [Run database migrations](/self-hosting/migrations)
 
-### VPS, bare metal
+#### VPS, bare metal
 
 To run the actual server, you need the following command:
 
@@ -128,7 +123,7 @@ malak http --config path/to/.yml
 
 </CodeGroup>
 
-#### Systemd service
+##### Systemd service
 
 You can use this sample Systemd configuration to run the service.
 

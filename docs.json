@@ -10,6 +10,16 @@
   "navigation": {
     "groups": [
       {
+        "group": "Open Source Contributions",
+        "pages": [
+          "introduction",
+          "development",
+          "backend-configuration",
+          "pr",
+          "styling"
+        ]
+      },
+      {
         "group": "Self Hosting",
         "pages": [
           "self-hosting/installation",
@@ -26,16 +36,6 @@
           "deployments/vercel",
           "deployments/render",
           "deployments/railway"
-        ]
-      },
-      {
-        "group": "Open Source Contributions",
-        "pages": [
-          "introduction",
-          "development",
-          "backend-configuration",
-          "pr",
-          "styling"
         ]
       }
     ],

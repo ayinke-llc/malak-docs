@@ -3,20 +3,23 @@ title: "Installation"
 icon: code
 ---
 
+## Backend
+
 Malak's backend runs with very minimal hardware requirements by itself, you really need
-as little as 1GB ram amongst others.
+as little as 512MB ram amongst others.
 
 <Tip>
   For production, we strongly recommend Linux but it should work across Windows
   and macOS too
 </Tip>
 
-## Backend
-
-At the very minimum, this needs to be in your `.env` or use your `.yml` but if using `.env`,
+At the very minimum, this needs to be in your `.env` or your `.yml` config file but if using `.env`,
 it should look like below:
 
-```txt
+<CodeGroup>
+
+```txt env
+
 MALAK_AUTH_GOOGLE_CLIENT_ID=
 MALAK_AUTH_GOOGLE_CLIENT_SECRET=
 MALAK_AUTH_GOOGLE_REDIRECT_URI=https://app.malak.vc
@@ -47,6 +50,56 @@ MALAK_SECRETS_PROVIDER=aes_gcm
 MALAK_SECRETS_AES_KEY=V90duVSe
 ```
 
+```yml yaml
+auth:
+  google:
+    client_id: "CLIENT_ID"
+    client_secret: "CLIENT_SECRET"
+    redirect_uri: "http://localhost:3000"
+    is_enabled: true
+
+  jwt:
+    key: JWT_KEY
+
+billing:
+  is_enabled: true
+  default_plan_reference: prod_Qmjfkf
+  stripe:
+    api_key: sk_test_51P
+    webhook_secret: whsec_XCt
+
+http:
+  swagger:
+    port: 9999
+    ui_enabled: true
+
+uploader:
+  s3:
+    access_key: BhK
+    access_secret: dzE
+    region: lagos-1
+    endpoint: http://localhost:9000
+    use_tls: false
+
+email:
+  provider: smtp
+  sender: email@updates.domain
+  sender_name: Malak
+  smtp:
+    host: localhost
+    password: random
+    username: random
+    use_tls: false
+    port: 9125
+
+secrets:
+  provider: aes_gcm
+  aes:
+    key: ujffjkfk
+```
+
+</CodeGroup>
+
 <Tip>
   There are way more options but [you can find other
   options](/backend-configuration){" "}
@@ -59,15 +112,23 @@ Prerequisites:
 - [Run cron jobs](/self-hosting/cron)
 - [Run database migrations](/self-hosting/migrations)
 
-#### VPS, bare metal
+### VPS, bare metal
 
 To run the actual server, you need the following command:
 
-```sh
+<CodeGroup>
+
+```sh env config
 malak http
 ```
 
-##### Systemd service
+```sh yaml config
+malak http --config path/to/.yml
+```
+
+</CodeGroup>
+
+#### Systemd service
 
 You can use this sample Systemd configuration to run the service.
 

@@ -1,56 +1,41 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Malak documentation",
+  "theme": "linden",
+  "name": "Malak docs",
   "colors": {
     "primary": "#0a3171",
     "light": "#1150db",
     "dark": "#0a3171"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Developing",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "introduction",
-              "development",
-              "backend-configuration"
-            ]
-          },
-          {
-            "group": "Open Source Contributions",
-            "pages": [
-              "pr",
-              "styling"
-            ]
-          }
+        "group": "Self Hosting",
+        "pages": [
+          "self-hosting/installation",
+          "self-hosting/migrations",
+          "self-hosting/upgrading",
+          "self-hosting/integrations",
+          "self-hosting/cron",
+          "self-hosting/license"
         ]
       },
       {
-        "tab": "Self hosting",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "self-hosting/installation",
-              "self-hosting/migrations",
-              "self-hosting/upgrading",
-              "self-hosting/integrations",
-              "self-hosting/cron",
-              "self-hosting/license"
-            ]
-          },
-          {
-            "group": "One click deployments",
-            "pages": [
-              "deployments/vercel",
-              "deployments/render",
-              "deployments/railway"
-            ]
-          }
+        "group": "One click deployments",
+        "pages": [
+          "deployments/vercel",
+          "deployments/render",
+          "deployments/railway"
+        ]
+      },
+      {
+        "group": "Open Source Contributions",
+        "pages": [
+          "introduction",
+          "development",
+          "backend-configuration",
+          "pr",
+          "styling"
         ]
       }
     ],

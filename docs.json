@@ -38,6 +38,12 @@
           "deployments/render",
           "deployments/railway"
         ]
+      },
+      {
+        "group": "Changelog",
+        "pages": [
+          "changelog/introduction"
+        ]
       }
     ],
     "global": {

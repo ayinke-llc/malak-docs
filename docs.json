@@ -25,6 +25,7 @@
           "self-hosting/installation",
           "self-hosting/migrations",
           "self-hosting/upgrading",
+          "self-hosting/secrets",
           "self-hosting/integrations",
           "self-hosting/cron",
           "self-hosting/license"

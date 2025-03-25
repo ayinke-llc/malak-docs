@@ -25,6 +25,8 @@ MALAK_AUTH_GOOGLE_CLIENT_SECRET=
 MALAK_AUTH_GOOGLE_REDIRECT_URI=https://app.malak.vc
 MALAK_AUTH_GOOGLE_IS_ENABLED=true
 
+MALAK_API_KEY_HASH_SECRET=12347844
+
 MALAK_AUTH_JWT_KEY=a907e75f8091
 
 ## new acccounts are assigned this plan
@@ -43,6 +45,9 @@ MALAK_UPLOADER_S3_USE_TLS=true
 
 MALAK_EMAIL_PROVIDER=resend
 MALAK_EMAIL_RESEND_API_KEY=re_c
+MALAK_EMAIL_RESEND_WEBHOOK_SECRET=re_c
+MALAK_EMAIL_SENDER=oops@domain.com
+MALAK_EMAIL_SENDER_NAME=Your org
 
 MALAK_SECRETS_PROVIDER=aes_gcm
 MALAK_SECRETS_AES_KEY=V90duVSe
@@ -58,6 +63,9 @@ auth:
 
   jwt:
     key: JWT_KEY
+
+api_key:
+  hash_secret: 12345
 
 billing:
   ## new accounts assigned this plan
@@ -80,12 +88,9 @@ email:
   provider: smtp
   sender: email@updates.domain
   sender_name: Malak
-  smtp:
-    host: localhost
-    password: random
-    username: random
-    use_tls: false
-    port: 9125
+  resend:
+    api_key: fjfk
+    webhook_secret: fufhifuji
 
 secrets:
   provider: aes_gcm

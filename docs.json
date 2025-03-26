@@ -28,7 +28,8 @@
           "self-hosting/secrets",
           "self-hosting/integrations",
           "self-hosting/cron",
-          "self-hosting/license"
+          "self-hosting/license",
+          "self-hosting/deck"
         ]
       },
       {

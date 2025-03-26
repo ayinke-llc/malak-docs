@@ -6,11 +6,12 @@ icon: code
 ## Backend
 
 Malak's backend runs with very minimal hardware requirements by itself, you really need
-as little as 512MB ram amongst others.
+as little as 512MB ram amongst others. For production, we strongly recommend Linux
+but it should work across Windows and macOS too
 
 <Tip>
-  For production, we strongly recommend Linux but it should work across Windows
-  and macOS too
+  We offer white glove self-hosting services. Shoot us an email at
+  support@ayinke.ventures
 </Tip>
 
 At the very minimum, this needs to be in your `.env` or your `.yml` config file but if using `.env`,
@@ -156,3 +157,22 @@ docker run ghcr.io/ayinke-llc/malak:0.7.5
 ## Frontend
 
 It is a NextJS app so it can be Installable anywhere such as Vercel and others.
+Source is [on Github and installable from there](https://github.com/ayinke-llc/malak/tree/main/web/ui)
+
+### Configuration
+
+```txt
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+# NEXT_PUBLIC_MALAK_POSTHOG_KEY=
+# NEXT_PUBLIC_MALAK_POSTHOG_HOST=https://us.i.posthog.com
+# NEXT_PUBLIC_MALAK_ENABLE_POSTHOG=false
+# NEXT_PUBLIC_SENTRY_DSN=https://xxxx.ingest.us.sentry.io/45
+NEXT_PUBLIC_DECKS_DOMAIN=https://deck.malak.vc
+NEXT_PUBLIC_SUPPORT_EMAIL=support@ayinke.ventures
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:5300/v1
+```
+
+### Deck viewer
+
+<Link href="/self-hosting/deck">Docs are available here </Link>

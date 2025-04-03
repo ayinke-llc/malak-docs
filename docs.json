@@ -29,7 +29,8 @@
           "self-hosting/integrations",
           "self-hosting/cron",
           "self-hosting/license",
-          "self-hosting/deck"
+          "self-hosting/deck",
+          "self-hosting/uploading"
         ]
       },
       {

@@ -14,7 +14,6 @@
         "pages": [
           "introduction",
           "development",
-          "backend-configuration",
           "pr",
           "styling"
         ]
@@ -23,6 +22,7 @@
         "group": "Self Hosting",
         "pages": [
           "self-hosting/installation",
+          "self-hosting/configuration",
           "self-hosting/migrations",
           "self-hosting/upgrading",
           "self-hosting/secrets",

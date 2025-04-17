@@ -23,7 +23,6 @@
         "pages": [
           "self-hosting/installation",
           "self-hosting/configuration",
-          "self-hosting/migrations",
           "self-hosting/upgrading",
           "self-hosting/secrets",
           "self-hosting/integrations",

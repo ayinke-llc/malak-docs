@@ -17,6 +17,10 @@ but it should work across Windows and macOS too
 At the very minimum, this needs to be in your `.env` or your `.yml` config file but if using `.env`,
 it should look like below:
 
+<Info>You can generate you `aes_gcm` key with `LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32; echo`</Info>
+
+<Tip>Download the maxmind country db and city db then use their path</Tip>
+
 <CodeGroup>
 
 ```txt env
@@ -55,9 +59,9 @@ MALAK_SECRETS_AES_KEY=V90duVSe
 
 MALAK_ANALYTICS_MAX_MIND_COUNTRY_DB=
 MALAK_ANALYTICS_MAX_MIND_CITY_DB=
-```
 
-<Tip>Download the maxmind country db and city db then use their path</Tip>
+MALAK_BILLING_DEFAULT_PLAN_REFERENCE
+```
 
 ```yml yaml
 auth:
@@ -98,6 +102,9 @@ email:
   resend:
     api_key: fjfk
     webhook_secret: fufhifuji
+
+billing:
+  default_plan_reference: "reference from plans table"
 
 secrets:
   provider: aes_gcm
@@ -156,12 +163,21 @@ WantedBy=multi-user.target
 #### Docker
 
 ```sh
-docker run ghcr.io/ayinke-llc/malak:0.9.2
+docker run ghcr.io/ayinke-llc/malak:0.9.7
 ```
 
 You can view the [latest docker images here](https://github.com/ayinke-llc/malak/pkgs/container/malak/versions)
 
 You can verify with `gh attestation verify oci://ghcr.io/ayinke-llc/malak:{TAG} --owner ayinke-llc --predicate-type https://in-toto.io/attestation/release/v0.1`
+
+#### Plans
+
+You need to have atleast one plan in your `plans` table. There are two ways to do this:
+
+- `malak plans create`
+- Import this sample sql into your database. [Github gist](https://gist.github.com/adelowo/f05d6845752e336ceb45b60573da37ed)
+
+After this, make sure to update the billing default reference to this
 
 ## Frontend
 

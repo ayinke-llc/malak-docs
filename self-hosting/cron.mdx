@@ -42,3 +42,41 @@ malak cron deck-analytics
 ## Sync integrations data
 
 Please view [the dedicated page for this command](/self-hosting/integrations)
+
+## Kubernetes
+
+```yml
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: malak-deck-analytics
+  namespace: experiments
+spec:
+  schedule: "0 */2 * * *"
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: regcred
+          containers:
+            - name: malak
+              resources:
+                requests:
+                  memory: "128Mi"
+                limits:
+                  memory: "256Mi"
+              image: ghcr.io/ayinke-llc/malak:45910b5e
+              command:
+                - /bin/sh
+                - -c
+                - /cmd cron decks-analytics
+              envFrom:
+                - secretRef:
+                    name: infisicalsecret-malak
+              imagePullPolicy: IfNotPresent
+```

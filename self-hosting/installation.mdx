@@ -132,6 +132,125 @@ Prerequisites:
 
 - [Run cron jobs](/self-hosting/cron)
 
+#### Kubernetes
+
+<CodeGroup>
+
+```yml deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: malak-server
+  namespace: experiments
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: malak-server
+  template:
+    metadata:
+      labels:
+        app: malak-server
+      annotations:
+        secrets.infisical.com/auto-reload: "true"
+    spec:
+      volumes:
+        - name: geoip-volume
+          emptyDir: {}
+      initContainers:
+        - name: maxmind-downloader
+          image: curlimages/curl:latest
+          command:
+            - sh
+            - -c
+            - |
+              curl -L -u maxmindAccountID:licenseKey "https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz" -o /tmp/city.tar.gz && \
+              cd /tmp && \
+              tar -xzf city.tar.gz && \
+              find . -name "*.mmdb" -type f -exec cp {} /opt/maxmind/city.mmdb \;
+          volumeMounts:
+            - name: geoip-volume
+              mountPath: /opt/maxmind
+
+        - name: country-maxmind-downloader
+          image: curlimages/curl:latest
+          command:
+            - sh
+            - -c
+            - |
+              curl -L -u maxmindAccountID:licenseKey "https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz" -o /tmp/country.tar.gz && \
+              cd /tmp && \
+              tar -xzf country.tar.gz && \
+              find . -name "*.mmdb" -type f -exec cp {} /opt/maxmind/country.mmdb \;
+          volumeMounts:
+            - name: geoip-volume
+              mountPath: /opt/maxmind
+
+      containers:
+        - name: server
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+          image: ghcr.io/ayinke-llc/malak:0.9.9
+          envFrom:
+            - secretRef:
+                name: infisicalsecret-malak
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5400
+          volumeMounts:
+            - name: geoip-volume
+              mountPath: /opt/maxmind
+      imagePullSecrets:
+        - name: regcred
+```
+
+```yml service
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: malak-ingress
+  namespace: experiments
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.malak.vc
+      secretName: malak-tls
+  rules:
+    - host: api.malak.vc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: malak-service
+                port:
+                  number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: malak-service
+  namespace: experiments
+spec:
+  ports:
+    - port: 80
+      targetPort: 5400
+  selector:
+    app: malak-server
+```
+
+</CodeGroup>
+
 #### VPS, bare metal
 
 To run the actual server, you need the following command:
